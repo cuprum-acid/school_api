@@ -28,5 +28,12 @@ module SchoolApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    
+    def self.db_exists?
+      ActiveRecord::Base.connection
+      true
+    rescue ActiveRecord::NoDatabaseError
+      false
+    end
   end
 end
