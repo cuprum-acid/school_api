@@ -1,24 +1,56 @@
-# README
+# School API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Это REST API сервис для управления данными о школах, классах и учениках. API позволяет создавать и удалять учеников, просматривать списки классов и учеников в классах.
 
-Things you may want to cover:
+## Технологии
 
-* Ruby version
+- Ruby on Rails 8
+- PostgreSQL
+- Docker & Docker Compose
+- OpenAPI (Swagger) для документации API
 
-* System dependencies
+## Требования
 
-* Configuration
+- Docker
+- Docker Compose
 
-* Database creation
+## Установка и запуск
 
-* Database initialization
+1. Клонируйте репозиторий:
+   ```bash
+   git clone https://github.com/cuprum-acid/school_api.git
+   cd school_api
+   ```
 
-* How to run the test suite
+2. Запустите приложение с помощью Docker Compose:
+   ```bash
+   docker compose up
+   ```
 
-* Services (job queues, cache servers, search engines, etc.)
+3. Приложение будет доступно по адресу `http://localhost:3000`.
 
-* Deployment instructions
+## API Документация
 
-* ...
+Swagger UI доступен по адресу: `http://localhost:3000/api-docs`
+
+### Основные эндпоинты:
+
+- `POST /students` - Регистрация нового студента
+- `DELETE /students/{user_id}` - Удаление студента
+- `GET /schools/{school_id}/classes/{class_id}/students` - Список студентов класса
+- `GET /schools/{school_id}/classes` - Список классов школы
+
+## Создание тестовых данных
+
+Для создания тестовых данных выполните:
+
+```bash
+docker compose exec web rails c
+```
+
+В консоли Rails выполните:
+
+```ruby
+school = School.create!
+SchoolClass.create!(number: 1, letter: 'А', school: school)
+```
